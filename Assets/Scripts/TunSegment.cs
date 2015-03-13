@@ -4,23 +4,6 @@ using System.Collections.Generic;
 
 public class TunSegment : MonoBehaviour {
 
-	public struct Ring {
-		// Where the center of bottom ring should be on the XZ plane
-		public float centerX, centerY, centerZ, radius;
-		public Ring(float centerX, float  centerY, float centerZ, float radius) {
-			this.centerX = centerX;
-			this.centerY = centerY;
-			this.centerZ = centerZ;
-			this.radius = radius;
-		}
-		public Ring(Vector3 center, float radius) {
-			this.centerX = center.x;
-			this.centerY = center.y;
-			this.centerZ = center.z;
-			this.radius = radius;
-		}
-	}
-
 	private GameObject player;
 	private Ring top, bottom;
 	private float minFallBehind = 15;
