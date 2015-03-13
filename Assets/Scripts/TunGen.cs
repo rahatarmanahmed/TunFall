@@ -17,7 +17,7 @@ public class TunGen : MonoBehaviour {
 	void CreateSegment(TunSegment.Ring top, TunSegment.Ring bottom) {
 		GameObject obj = new GameObject ();
 		TunSegment segment = obj.AddComponent<TunSegment>();
-		segment.CreateMesh (bottom, top, numTunSides, material);
+		segment.CreateMesh (top, bottom, numTunSides, material);
 		obj.transform.parent = transform;
 	}
 
