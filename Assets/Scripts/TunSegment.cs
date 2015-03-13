@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class TunSegment : MonoBehaviour {
 
 	private GameObject player;
-	private Ring top, bottom;
+	public Ring top, bottom;
 	private float minFallBehind = 15;
 
 	// Use this for initialization
@@ -95,5 +95,18 @@ public class TunSegment : MonoBehaviour {
 			transform.parent = null;
 			Destroy(gameObject);
 		}
+	}
+
+	public bool IncludesDepth(float y) {
+		return top.centerY > y && y > bottom.centerY;
+	}
+
+	public Vector3 LerpDepth(float y) {
+		float t = (y - top.centerY) / (bottom.centerY - top.centerY);
+		return new Vector3(
+			Mathf.Lerp(top.centerX, bottom.centerX, t),
+			y,
+			Mathf.Lerp(top.centerZ, bottom.centerZ, t)
+		);
 	}
 }
