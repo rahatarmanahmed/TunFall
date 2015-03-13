@@ -20,21 +20,28 @@ public class TunSegment : MonoBehaviour {
 			this.radius = radius;
 		}
 	}
-	
+
+	private GameObject player;
+	private Ring top, bottom;
+	private float minFallBehind = 10;
+
 	// Use this for initialization
 	void Start () {
-		
+		player = GameObject.FindWithTag("Player");
 	}
 	
 	// Creates a Tun Segment between the two rings with n sides.
 	public void CreateMesh(Ring top, Ring bottom, int n, Material material) {
 		// Swap the rings if they're in the wrong order.
 		if(top.centerY < bottom.centerY) {
-			Debug.Log("swapped "+top.centerY +" "+ bottom.centerY);
 			Ring temp = top;
 			top = bottom;
 			bottom = temp;
 		}
+
+		// Save the rings
+		this.top = top;
+		this.bottom = bottom;
 
 		// Create the mesh components
 		MeshFilter meshFilter = gameObject.AddComponent<MeshFilter> ();
@@ -101,6 +108,9 @@ public class TunSegment : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if(bottom.centerY - player.transform.position.y >= minFallBehind) {
+			transform.parent = null;
+			Destroy(gameObject);
+		}
 	}
 }
