@@ -13,7 +13,10 @@ public class TunGen : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+		// Create beginning ring so player doesn't see outside
+		var top = new TunSegment.Ring(0, 20, 0, 5);
+		var bottom = new TunSegment.Ring(0, 0, 0, 5);
+		CreateSegment (top, bottom);
 	}
 
 	void CreateSegment(TunSegment.Ring top, TunSegment.Ring bottom) {

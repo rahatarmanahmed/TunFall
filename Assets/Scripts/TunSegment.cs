@@ -23,7 +23,7 @@ public class TunSegment : MonoBehaviour {
 
 	private GameObject player;
 	private Ring top, bottom;
-	private float minFallBehind = 10;
+	private float minFallBehind = 15;
 
 	// Use this for initialization
 	void Start () {
