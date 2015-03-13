@@ -28,6 +28,8 @@ public class TunGen : MonoBehaviour {
 		GameObject obj = new GameObject ();
 		TunSegment segment = obj.AddComponent<TunSegment>();
 		segment.CreateMesh (top, bottom, numSides, material);
+		MeshCollider collider = obj.AddComponent<MeshCollider> ();
+		
 		obj.transform.parent = transform;
 		obj.layer = gameObject.layer;
 	}
