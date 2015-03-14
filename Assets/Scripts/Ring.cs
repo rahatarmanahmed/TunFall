@@ -3,6 +3,9 @@
 public class Ring {
 	// Where the center of bottom ring should be on the XZ plane
 	public float centerX, centerY, centerZ, radius;
+	public Vector3 Center {
+		get { return new Vector3(centerX, centerY, centerZ); }
+	}
 	public Ring(float centerX, float  centerY, float centerZ, float radius) {
 		this.centerX = centerX;
 		this.centerY = centerY;

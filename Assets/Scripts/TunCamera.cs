@@ -17,9 +17,15 @@ public class TunCamera : MonoBehaviour {
 
 		var tun = GameObject.FindWithTag ("Tun");
 		var segments = tun.GetComponentsInChildren<TunSegment> (false);
-		foreach (var segment in segments) {
+		for (int k=0;k<segments.Length;k++) {
+			var segment = segments[k];
 			if(segment.IncludesDepth(y)) {
 				transform.position = segment.LerpDepth(y);
+				float t = (y - segment.top.centerY) / (segment.bottom.centerY - segment.top.centerY);
+				var nextSegment = segments[k+1];
+				var oldQ = Quaternion.LookRotation(segment.bottom.Center - segment.top.Center, new Vector3(0,0,1));
+				var desiredQ = Quaternion.LookRotation(nextSegment.bottom.Center - nextSegment.top.Center, new Vector3(0,0,1));
+				transform.rotation = Quaternion.Slerp(oldQ, desiredQ, t);
 			}
 		}
 	}
