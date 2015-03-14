@@ -22,9 +22,7 @@ public class PlayerController : MonoBehaviour {
 		body.AddForce(new Vector3(0,0,1)*vAxis*speed);
 
 		var v  = Vector3.ClampMagnitude(new Vector3(body.velocity.x *(1-dragCoefficient), 0, body.velocity.z*(1-dragCoefficient)), maxSpeed);
-
 		v.y = -fallSpeed;
-		Debug.Log (v);
 		body.velocity = v;
 	}
 }
