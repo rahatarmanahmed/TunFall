@@ -9,6 +9,7 @@ public class TunGen : MonoBehaviour {
 	public Material material;
 	public float curveLength = 100;
 	public float curveStepSize = .1f;
+	public float initialRadius = 10;
 
 	private float curveT = 0;
 	private Ring lastDesiredCenter;
@@ -17,8 +18,8 @@ public class TunGen : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		// Create beginning ring so player doesn't see outside
-		var top = new Ring(0, 20, 0, 5);
-		var bottom = new Ring(0, 0, 0, 5);
+		var top = new Ring(0, 20, 0, initialRadius);
+		var bottom = new Ring(0, 0, 0, initialRadius);
 		CreateSegment (top, bottom);
 		nextDesiredCenter = bottom;
 		PickNextDesiredCenter();
@@ -42,7 +43,6 @@ public class TunGen : MonoBehaviour {
 		var top = Ring.SmoothStep(lastDesiredCenter, nextDesiredCenter, curveT);
 		curveT += curveStepSize;
 		var bottom = Ring.SmoothStep(lastDesiredCenter, nextDesiredCenter, curveT);
-		Debug.Log ("top: "+top.ToString() +" bottom: "+bottom.ToString());
 		CreateSegment (top, bottom);
 	}
 
@@ -52,9 +52,8 @@ public class TunGen : MonoBehaviour {
 			Random.Range(-10, 10),
 			lastDesiredCenter.centerY - curveLength,
 			Random.Range(-10, 10),
-			5
+			initialRadius
 		);
-		Debug.Log ("last: "+lastDesiredCenter.ToString() +" next: "+nextDesiredCenter.ToString());
 	}
 
 	// Update is called once per frame
