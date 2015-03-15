@@ -17,6 +17,11 @@ public class PlayerController : MonoBehaviour {
 	void Update () {
 		float hAxis = Input.GetAxis("Horizontal");
 		float vAxis = Input.GetAxis("Vertical");
+		if(Application.platform == RuntimePlatform.Android
+		   || Application.platform == RuntimePlatform.IPhonePlayer) {
+			hAxis = Input.acceleration.x;
+			vAxis = Input.acceleration.y;
+		}
 		Rigidbody body = gameObject.GetComponent<Rigidbody>();
 		body.AddForce(new Vector3(1,0,0)*hAxis*speed);
 		body.AddForce(new Vector3(0,0,1)*vAxis*speed);
