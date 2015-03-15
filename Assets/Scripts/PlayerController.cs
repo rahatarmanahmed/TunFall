@@ -15,12 +15,15 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if(GameController.paused)
+			return;
 		float hAxis = Input.GetAxis("Horizontal");
 		float vAxis = Input.GetAxis("Vertical");
 		if(Application.platform == RuntimePlatform.Android
 		   || Application.platform == RuntimePlatform.IPhonePlayer) {
-			hAxis = Input.acceleration.x;
-			vAxis = Input.acceleration.y;
+
+			hAxis = Mathf.Clamp (Input.acceleration.x, -1, 1);
+			vAxis = Mathf.Clamp (Input.acceleration.y, -1, 1);
 		}
 		Rigidbody body = gameObject.GetComponent<Rigidbody>();
 		body.AddForce(new Vector3(1,0,0)*hAxis*speed);
