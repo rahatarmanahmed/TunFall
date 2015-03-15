@@ -10,6 +10,6 @@ public class UpdateScore : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		GetComponent<Text>().text = "Score: " + GameController.score +"m";
+		GetComponent<Text>().text = "Score: " + GameController.score +"m\nHighscore: " + GameController.highscore + "m";
 	}
 }

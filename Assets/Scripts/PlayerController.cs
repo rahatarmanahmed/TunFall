@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision collision) {
-		GameController.gameOver = true;
+		GameController.GameOver();
 	}
 	
 }
