@@ -91,7 +91,7 @@ public class TunSegment : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(bottom.centerY - player.transform.position.y >= minFallBehind) {
+		if(bottom.centerY - player.transform.position.y >= minFallBehind && !GameController.gameOver) {
 			transform.parent = null;
 			Destroy(gameObject);
 		}

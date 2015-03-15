@@ -13,6 +13,9 @@ public class TunCamera : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if(GameController.gameOver)
+			return;
+
 		var y = player.transform.position.y + cameraDistance;
 
 		var tun = GameObject.FindWithTag ("Tun");

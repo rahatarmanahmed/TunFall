@@ -9,17 +9,29 @@ public class TunGen : MonoBehaviour {
 	public Material material;
 	public float curveLength = 100;
 	public float curveStepSize = .1f;
-	public float initialRadius = 10;
+
+	public float firstSegmentLength = 100;
+	public float easyRadius = 10;
+	public float hardRadius = 7;
+	public float easyTurn = 10;
+	public float hardTurn = 20;
+	public float secondsToHard = 120;
 
 	private float curveT = 0;
+	public float radius, turn;
+	private double startTime;
 	private Ring lastDesiredCenter;
 	private Ring nextDesiredCenter;
 
 	// Use this for initialization
 	void Start () {
+		// Initialize difficulty;
+		radius = easyRadius;
+		turn = easyTurn;
+		startTime = Time.realtimeSinceStartup;
 		// Create beginning ring so player doesn't see outside
-		var top = new Ring(0, 20, 0, initialRadius);
-		var bottom = new Ring(0, 0, 0, initialRadius);
+		var top = new Ring(0, 10, 0, radius);
+		var bottom = new Ring(0, -firstSegmentLength, 0, radius);
 		CreateSegment (top, bottom);
 		nextDesiredCenter = bottom;
 		PickNextDesiredCenter();
@@ -48,17 +60,25 @@ public class TunGen : MonoBehaviour {
 
 	void PickNextDesiredCenter() {
 		lastDesiredCenter = nextDesiredCenter;
+		var turnDir = Random.insideUnitCircle * turn;
 		nextDesiredCenter = new Ring(
-			Random.Range(-10, 10),
+			lastDesiredCenter.centerX + turnDir.x,
 			lastDesiredCenter.centerY - curveLength,
-			Random.Range(-10, 10),
-			initialRadius
+			lastDesiredCenter.centerZ + turnDir.y,
+			radius
 		);
 	}
 
 	// Update is called once per frame
 	void Update () {
+		float difficultyT = (float)(ElapsedTime() / secondsToHard);
+		radius = Mathf.Lerp(easyRadius, hardRadius, difficultyT);
+		turn = Mathf.Lerp(easyTurn, hardTurn, difficultyT);
 		while(transform.childCount < numSegments)
 			CreateNextSegment();
+	}
+
+	double ElapsedTime() {
+		return Time.realtimeSinceStartup - startTime;
 	}
 }

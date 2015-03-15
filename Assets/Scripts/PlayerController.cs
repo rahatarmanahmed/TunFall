@@ -25,5 +25,10 @@ public class PlayerController : MonoBehaviour {
 		v.y = -fallSpeed;
 		body.velocity = v;
 	}
+
+	void OnCollisionEnter(Collision collision) {
+		GameController.gameOver = true;
+	}
+	
 }
 
