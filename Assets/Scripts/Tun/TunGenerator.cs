@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class TunGen : MonoBehaviour {
+public class TunGenerator : MonoBehaviour {
 
 	public int numSides = 6;
 	public int numSegments = 10;

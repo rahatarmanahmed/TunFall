@@ -81,6 +81,7 @@ public class TunSegment : MonoBehaviour {
 		m.vertices = hardVertices.ToArray();
 		m.uv = uv;
 		m.triangles = triangles;
+		m.hideFlags = HideFlags.DontSave;
 		m.RecalculateBounds();
 		m.RecalculateNormals();
 
